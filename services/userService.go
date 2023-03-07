@@ -1,4 +1,4 @@
-package utils
+package services
 
 import (
 	"net/http"
@@ -19,7 +19,7 @@ func SetContentType(next http.Handler) http.Handler {
 	})
 }
 
-func GetUserReference(r *http.Request) (int, error) {
+func GetUserReference(r *http.Request) int {
 
 	vars := mux.Vars(r)
 	id := vars["id"]
@@ -28,8 +28,8 @@ func GetUserReference(r *http.Request) (int, error) {
 
 	if err != nil {
 		fmt.Println("Error during conversion")
-		return 0, err
+		return 0
 	}
 
-	return n, err
+	return n
 }

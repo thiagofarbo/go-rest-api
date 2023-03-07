@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"user-api/controllers"
+	"user-api/services"
 
 	"github.com/gorilla/mux"
 )
@@ -12,7 +13,7 @@ func HandleRequest() {
 
 	r := mux.NewRouter()
 
-	r.Use(utils.SetContentType)
+	r.Use(services.SetContentType)
 
 	r.HandleFunc("/", controllers.Home)
 	r.HandleFunc("/api/users", controllers.Listar).Methods("Get")

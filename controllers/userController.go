@@ -6,8 +6,7 @@ import (
 	"net/http"
 	"user-api/models"
 	"user-api/repository"
-
-	"github.com/gorilla/mux"
+	"user-api/services"
 )
 
 func Home(w http.ResponseWriter, r *http.Request) {
@@ -31,10 +30,8 @@ func Listar(w http.ResponseWriter, r *http.Request) {
 }
 
 func FindById(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id := vars["id"]
 
-	// service.
+	id := services.GetUserReference(r)
 
 	var p models.User
 	repository.DB.First(&p, id)
@@ -43,8 +40,8 @@ func FindById(w http.ResponseWriter, r *http.Request) {
 }
 
 func Update(w http.ResponseWriter, r *http.Request) {
-	vars := mux.Vars(r)
-	id := vars["id"]
+
+	id := services.GetUserReference(r)
 
 	var user models.User
 
@@ -58,8 +55,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 
 func Delete(w http.ResponseWriter, r *http.Request) {
 
-	vars := mux.Vars(r)
-	id := vars["id"]
+	id := services.GetUserReference(r)
 
 	var user models.User
 
